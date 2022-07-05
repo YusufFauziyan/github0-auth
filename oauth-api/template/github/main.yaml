@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        name: Check out code
+
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        name: Build & push Docker image
+        with:
+          image: jamstack/demo-react-jamstack
+          tags: latest
+          registry: registry.carakan.id
+          dockerfile: Dockerfile
+          username: carakan
+          password: 2wsx1qaz
