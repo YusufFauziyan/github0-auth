@@ -123,45 +123,45 @@ exports.clone = async (req, res) => {
       });
     }
     // push to admin
-    // await axios.post(
-    //   "https://api.github.com/user/repos",
-    //   {
-    //     name: nameRepo,
-    //   },
-    //   {
-    //     headers: {
-    //       Authorization: "token ghp_MEVoGhQcdU5CCi4vM9JDOBtBO2cs51jgON7",
-    //       "Content-Type": "application/x-www-form-urlencoded",
-    //     },
-    //   }
-    // );
-    // childProcess.execSync(
-    //   `cd upload/repos/${req.body.usernameGithub}/${replaceRepo} && rm -rf .git && git init && git add . && git commit -m "first commit" && git branch -M main && git remote add origin https://github.com/DevKayangan/${nameRepo} && git remote set-url origin https://DevKayangan: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@github.com/DevKayangan/${nameRepo} && git push --set-upstream origin main`
-    // );
-    // let counter = setInterval(async () => {
-    //   console.log("onprogress");
-    // res.status(200).json({
-    //   nameApp: `${nameRepo}`,
-    //   message: "onprogress",
-    // });
-    //   let dataWorkflows = await axios.get(
-    //     `https://api.github.com/repos/DevKayangan/${nameRepo}/actions/runs`,
-    //     {
-    //       headers: {
-    //         Authorization: "token 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",
-    //         Accept: "application/vnd.github.v3+json",
-    //       },
-    //     }
-    //   );
-    //   if (dataWorkflows.data.workflow_runs[0].status === "completed") {
-    //     console.log("completed");
-    //     clearInterval(counter);
-    //     return res.status(200).json({
-    //       nameApp: `${nameRepo}`,
-    //       message: "completed",
-    //     });
-    //   }
-    // }, 10000);
+    await axios.post(
+      "https://api.github.com/user/repos",
+      {
+        name: nameRepo,
+      },
+      {
+        headers: {
+          Authorization: "token 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",
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
+    childProcess.execSync(
+      `cd upload/repos/${req.body.usernameGithub}/${replaceRepo} && rm -rf .git && git init && git add . && git commit -m "first commit" && git branch -M main && git remote add origin https://github.com/DevKayangan/${nameRepo} && git remote set-url origin https://DevKayangan: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@github.com/DevKayangan/${nameRepo} && git push --set-upstream origin main`
+    );
+    let counter = setInterval(async () => {
+      console.log("onprogress");
+      // res.status(200).json({
+      //   nameApp: `${nameRepo}`,
+      //   message: "onprogress",
+      // });
+      let dataWorkflows = await axios.get(
+        `https://api.github.com/repos/DevKayangan/${nameRepo}/actions/runs`,
+        {
+          headers: {
+            Authorization: "token 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",
+            Accept: "application/vnd.github.v3+json",
+          },
+        }
+      );
+      if (dataWorkflows.data.workflow_runs[0].status === "completed") {
+        console.log("completed");
+        clearInterval(counter);
+        return res.status(200).json({
+          nameApp: `${nameRepo}`,
+          message: "completed",
+        });
+      }
+    }, 10000);
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -198,22 +198,22 @@ exports.template = async (req, res) => {
         );
       });
       // push admin from template
-      // await axios.post(
-      //   "https://api.github.com/user/repos",
-      //   {
-      //     name: nameRepo,
-      //     private: true,
-      //   },
-      //   {
-      //     headers: {
-      //       Authorization: "token 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",
-      //       "Content-Type": "application/x-www-form-urlencoded",
-      //     },
-      //   }
-      // );
-      // childProcess.execSync(
-      //   `cd template/react/reactjstemplate && git init && git add . && git commit -m "first commit" && git branch -M main && git remote add origin https://github.com/DevKayangan/${nameRepo} && git remote set-url origin https://DevKayangan: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@github.com/DevKayangan/${nameRepo} && git push --set-upstream origin main && rm -rf .git`
-      // );
+      await axios.post(
+        "https://api.github.com/user/repos",
+        {
+          name: nameRepo,
+          private: true,
+        },
+        {
+          headers: {
+            Authorization: "token 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",
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }
+      );
+      childProcess.execSync(
+        `cd template/react/reactjstemplate && git init && git add . && git commit -m "first commit" && git branch -M main && git remote add origin https://github.com/DevKayangan/${nameRepo} && git remote set-url origin https://DevKayangan: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@github.com/DevKayangan/${nameRepo} && git push --set-upstream origin main && rm -rf .git`
+      );
       // push user from template
       await axios.post(
         "https://api.github.com/user/repos",
@@ -231,30 +231,30 @@ exports.template = async (req, res) => {
         `cd template/react/reactjstemplate && git init && git add . && git reset -- .github/* Dockerfile nginx.conf && git commit -m "first commit" && git branch -M main && git remote add origin https://github.com/${req.body.usernameGithub}/${nameRepo} && git remote set-url origin https://${req.body.usernameGithub}:${req.body.tokenGithub}@github.com/${req.body.usernameGithub}/${nameRepo} && git push --set-upstream origin main && rm -rf .git && cd .github && cd workflows && rm -rf main.yaml`
       );
       // check build success or not
-      // let counter = setInterval(async () => {
-      //   console.log("onprogress");
-      //   // res.status(200).json({
-      //   //   nameApp: `${nameRepo}`,
-      //   //   message: "onprogress",
-      //   // });
-      //   let dataWorkflows = await axios.get(
-      //     `https://api.github.com/repos/DevKayangan/${nameRepo}/actions/runs`,
-      //     {
-      //       headers: {
-      //         Authorization: "token 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",
-      //         Accept: "application/vnd.github.v3+json",
-      //       },
-      //     }
-      //   );
-      //   if (dataWorkflows.data.workflow_runs[0].status === "completed") {
-      //     console.log("completed");
-      //     clearInterval(counter);
-      //     return res.status(200).json({
-      //       nameApp: `${nameRepo}`,
-      //       message: "completed",
-      //     });
-      //   }
-      // }, 10000);
+      let counter = setInterval(async () => {
+        console.log("onprogress");
+        // res.status(200).json({
+        //   nameApp: `${nameRepo}`,
+        //   message: "onprogress",
+        // });
+        let dataWorkflows = await axios.get(
+          `https://api.github.com/repos/DevKayangan/${nameRepo}/actions/runs`,
+          {
+            headers: {
+              Authorization: "token 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",
+              Accept: "application/vnd.github.v3+json",
+            },
+          }
+        );
+        if (dataWorkflows.data.workflow_runs[0].status === "completed") {
+          console.log("completed");
+          clearInterval(counter);
+          return res.status(200).json({
+            nameApp: `${nameRepo}`,
+            message: "completed",
+          });
+        }
+      }, 10000);
     }
   } catch (error) {
     console.log(error);
